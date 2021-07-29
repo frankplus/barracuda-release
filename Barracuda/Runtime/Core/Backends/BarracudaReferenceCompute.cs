@@ -2321,7 +2321,7 @@ public class ReferenceComputeOps : ReferenceCPUOps
     public override Tensor Flatten(Tensor X)
     {
         var newShape = X.shape.Flatten();
-        if (X.shape == newShape)
+        if (X.shape == newShape || ComputeInfo.channelsOrder == ComputeInfo.ChannelsOrder.NHWC)
             return base.Flatten(X);
 
         return CopyAndReshape_NCHW(X, newShape);
